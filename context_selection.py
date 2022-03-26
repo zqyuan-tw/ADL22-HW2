@@ -54,8 +54,8 @@ def parse_args():
     parser.add_argument("--max_len", type=int, default=512)
     parser.add_argument("--pretrained_model", type=str, default="bert-base-chinese")
     parser.add_argument("--lr", type=float, default=5e-5)
-    parser.add_argument("--gradient_accumulation", type=int, default=16)
-    parser.add_argument("--num_epoch", type=int, default=3)
+    parser.add_argument("--gradient_accumulation", type=int, default=64)
+    parser.add_argument("--num_epoch", type=int, default=2)
     parser.add_argument("--device", type=torch.device, help="cpu, cuda, cuda:0, cuda:1", default="cuda")
     parser.add_argument("--logging_step", type=int, default=100)
 
@@ -117,7 +117,7 @@ def train(args):
                 print(f"Epoch {epoch + 1} | Step {step} | loss = {train_loss / args.logging_step:.3f}, acc = {train_hit / args.logging_step:.3f}")
                 train_loss = train_hit = 0
 
-    model.save_pretrained(os.path.join(args.ckpt_dir, args.pretrained_model))
+    model.save_pretrained(os.path.join(args.ckpt_dir, os.path.basename(os.path.normpath(args.pretrained_model))))
 
 def test(args):
     with open(args.context_path, 'r', encoding="utf-8") as f:
