@@ -125,7 +125,7 @@ def test(args):
     test_set = CS_Dataset(args.input_file)
     test_loader = DataLoader(test_set, batch_size=1, shuffle=False)
 
-    model_dir = os.path.join(args.ckpt_dir, args.pretrained_model)
+    model_dir = os.path.join(args.ckpt_dir, os.path.basename(os.path.normpath(args.pretrained_model)))
     tokenizer = BertTokenizer.from_pretrained(args.pretrained_model)
     model = BertForMultipleChoice.from_pretrained(model_dir).to(args.device)
 
