@@ -33,7 +33,7 @@ def parse_args():
         default="./data/context.json"
         )
     parser.add_argument(
-        "--file",
+        "--input_file",
         type=Path,
         help="Path to the training or testing file.",
         default="./data/train.json"
@@ -81,7 +81,7 @@ class CS_Dataset(Dataset):
 def train(args):
     with open(args.context_path, 'r', encoding="utf-8") as f:
         context = json.load(f)
-    train_set = CS_Dataset(args.file)
+    train_set = CS_Dataset(args.input_file)
     if args.val_file is not None:
         val_set = CS_Dataset(args.val_file)
         train_set = ConcatDataset([train_set, val_set])
@@ -122,7 +122,7 @@ def train(args):
 def test(args):
     with open(args.context_path, 'r', encoding="utf-8") as f:
         context = json.load(f)
-    test_set = CS_Dataset(args.file)
+    test_set = CS_Dataset(args.input_file)
     test_loader = DataLoader(test_set, batch_size=1, shuffle=False)
 
     model_dir = os.path.join(args.ckpt_dir, args.pretrained_model)
