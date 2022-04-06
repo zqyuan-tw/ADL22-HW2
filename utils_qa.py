@@ -231,14 +231,14 @@ def postprocess_qa_predictions(
 
         logger.info(f"Saving predictions to {prediction_file}.")
         with open(prediction_file, "w") as writer:
-            writer.write(json.dumps(all_predictions, indent=4) + "\n")
+            writer.write(json.dumps(all_predictions, ensure_ascii=False, indent=4) + "\n")
         logger.info(f"Saving nbest_preds to {nbest_file}.")
         with open(nbest_file, "w") as writer:
-            writer.write(json.dumps(all_nbest_json, indent=4) + "\n")
+            writer.write(json.dumps(all_nbest_json, ensure_ascii=False, indent=4) + "\n")
         if version_2_with_negative:
             logger.info(f"Saving null_odds to {null_odds_file}.")
             with open(null_odds_file, "w") as writer:
-                writer.write(json.dumps(scores_diff_json, indent=4) + "\n")
+                writer.write(json.dumps(scores_diff_json, ensure_ascii=False, indent=4) + "\n")
 
     return all_predictions
 
@@ -419,13 +419,13 @@ def postprocess_qa_predictions_with_beam_search(
 
         logger.info(f"Saving predictions to {prediction_file}.")
         with open(prediction_file, "w") as writer:
-            writer.write(json.dumps(all_predictions, indent=4) + "\n")
+            writer.write(json.dumps(all_predictions, ensure_ascii=False, indent=4) + "\n")
         logger.info(f"Saving nbest_preds to {nbest_file}.")
         with open(nbest_file, "w") as writer:
-            writer.write(json.dumps(all_nbest_json, indent=4) + "\n")
+            writer.write(json.dumps(all_nbest_json, ensure_ascii=False, indent=4) + "\n")
         if version_2_with_negative:
             logger.info(f"Saving null_odds to {null_odds_file}.")
             with open(null_odds_file, "w") as writer:
-                writer.write(json.dumps(scores_diff_json, indent=4) + "\n")
+                writer.write(json.dumps(scores_diff_json, ensure_ascii=False, indent=4) + "\n")
 
     return all_predictions, scores_diff_json
