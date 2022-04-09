@@ -75,7 +75,7 @@ class CS_Dataset(Dataset):
         if "relevant" in data:
             return data['id'], data['question'], data['paragraphs'], data['paragraphs'].index(data['relevant'])
         else:
-            return data['id'], data['question'], data['paragraphs']
+            return data['id'], data['question'], data['paragraphs'], 0
 
 
 def train(args):
@@ -132,7 +132,7 @@ def test(args):
     selection = []
 
     model.eval()
-    for id, questions, choices in tqdm(test_loader):
+    for id, questions, choices, _ in tqdm(test_loader):
         encoding = tokenizer([questions[0] for j in range(len(choices))], [context[j] for j in choices], return_tensors="pt", padding=True, truncation=True, max_length=args.max_len)
         outputs = model(**{k: v.unsqueeze(0).to(args.device) for k, v in encoding.items()})
         selection.append({
