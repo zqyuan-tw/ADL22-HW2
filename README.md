@@ -44,7 +44,7 @@ python question_answering.py <--model_name_or_path model> [<--do_train> <--train
 - `--evaluation_strategy`: {no,steps,epoch} The evaluation strategy to use. (default: no)
 - `--output_dir`: The output directory where the model predictions and checkpoints will be written. (default: None)
 
-## Converting the output data of our question selection model to the required submission format format
+## Converting the output data of our question selection model to the required submission format 
 ```shell
 python to_submission.py [--input_file file] [--output_file file]
 ```
