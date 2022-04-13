@@ -34,7 +34,7 @@ def parse_args():
     parser.add_argument(
         "--mapping",
         type=Path,
-        help="Path to the training or testing file.",
+        help="File that store a mapping between intent and index.",
         default="../ADL21-HW1/cache/intent/intent2idx.json"
         )
     # parser.add_argument(
