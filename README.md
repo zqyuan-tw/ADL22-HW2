@@ -50,3 +50,23 @@ python to_submission.py [--input_file file] [--output_file file]
 ```
 - `--input_file`: Path to the input file. Default="./predict_predictions.json"
 - `--output_file`: Path to the output file. Default="./submission.csv"
+
+
+## Intent Classification (BONUS)
+```
+python intent_classification.py [--mode mode] [--ckpt_dir dir] [--input_file file] [--mapping map] [--output_path path] [--max_len len] [--pretrained_model] [--lr lr] [--gradient_accumulation step] [--num_epoch epoch] [--device device] [--logging_step step]
+```
+- `--mode`: train|test. Default="train"
+- `--ckpt_dir`: Directory to save the model file. Default="./ckpt/intent_classification/"
+- `--input_file`: Path to the training or testing file. Default="../ADL21-HW1/data/intent/train.json"
+- `--mapping`: File that store a mapping between intent and index. Default="../ADL21-HW1/cache/intent/intent2idx.json"
+- `--output_path`: Path of the output file. This argument will only be used when `mode=test`. Default="./intent.json"
+- `--max_len`: Default=512
+- `--pretrained_model`: Pretrained model from [Hugging Face](https://huggingface.co/models). Default="bert-base-uncased"
+    - `mode=train`: The finetuned model will be save under `ckpt_dir/pretrained_model/`. 
+    - `mode=test`: Read the configuration from `ckpt_dir/pretrained_model/`.
+- `--lr`: Default=5e-5
+- `--gradient_accumulation`: Number of accumulation steps before updating the model parameters. This argument will only be used when `mode=train`. Default=64 $$Effective\ batch size = batch\ size * gradient\ accumulation\ steps$$
+- `--num_epoch`: Number of training epoch. This argument will only be used when `mode=train`. Default=2
+- `--device`: cpu, cuda, cuda:0, cuda:1. Default="cuda"
+- `--logging_step`: Number of steps before outputing training log. This argument will only be used when `mode=train`. Default=500
